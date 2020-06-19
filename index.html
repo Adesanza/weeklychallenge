@@ -23,7 +23,20 @@
                git-clone- Cloning a repository into a newly created directory, creates remote-tracking branches for each branch in the cloned repository (visible using git branch --remotes), and creates and checks out an initial branch that is forked from the cloned repository’s currently active branch. After the clone, a plain git fetch without arguments will update all the remote-tracking branches, and a git pull without arguments will in addition merge the remote master branch into the current master branch, if any (this is untrue when "--single-branch"
             </p>
             <img src="Screenshot (25).png" alt="">
+            <p>
+                <h2>Flag Options in git-clone</h2>
+                <strong>-l or --local</strong> <br>
+                When the repository to clone from is on a local desktop/laptop, this flag bypasses the normal "Git aware" transport mechanism and clones the repository by making a copy of HEAD and everything under objects and refs directories. The files under .git/objects/ directory are hardlinked to save space when possible. If the repository is specified as a local path (e.g., /path/to/repo), this is the default, and --local is essentially a no-op. If the repository is specified as a URL, then this flag is ignored (and we never use the local optimizations). Specifying --no-local will override the default when /path/to/repo is given, using the regular Git transport instead. <br>
+                <strong>--no-hardlinks</strong> <br>
+                Force the cloning process from a repository on a local filesystem to copy the files under the .git/objects directory instead of using hardlinks. This may be desirable if you are trying to make a back-up of your repository. <br>
+                <strong>-s or --shared</strong> <br>
+                When the repository to clone is on the local machine, instead of using hard links, automatically setup .git/objects/info/alternates to share the objects with the source repository. The resulting repository starts out without any object of its own. <br>
+                <strong>NOTE:</strong> this is a possibly dangerous operation; do not use it unless you understand what it does. If you clone your repository using this option and then delete branches (or use any other Git command that makes any existing commit unreferenced) in the source repository, some objects may become unreferenced. These objects may be removed by normal Git operations (such as git commit) which automatically call git gc --auto.
+            </p>
         </div>
     </article>
+    <footer>
+        you can learn more about my favourite git command(git-clone)<a href="https://git-scm.com/docs/git-clone">here</a>
+    </footer>
 </body>
 </html>
